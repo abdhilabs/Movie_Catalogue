@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Movie Favorite App</string>
+    <string name="gambar_banner">Gambar Banner</string>
+    <string name="tab1">Movie Favorite</string>
+    <string name="tab2">Tv Show Favorite</string>
+</resources>
