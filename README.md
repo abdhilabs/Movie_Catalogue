@@ -1,3 +1,3 @@
 # Movie Catalogue
-Final Project MADE
-\nLearn about Retrofit, Provider, Widget, RoomDB
+### Final Project MADE
+Learn about Retrofit, Provider, Widget, RoomDB
