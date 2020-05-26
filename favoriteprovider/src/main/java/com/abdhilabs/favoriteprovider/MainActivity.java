@@ -1,25 +1,23 @@
 package com.abdhilabs.favoriteprovider;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.abdhilabs.favoriteprovider.adapter.ViewPageAdapter;
 import com.abdhilabs.favoriteprovider.ui.MovieFragment;
 import com.abdhilabs.favoriteprovider.ui.TvShowFragment;
 
 public class MainActivity extends AppCompatActivity {
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        ViewPager viewPager = findViewById(R.id.viewPager);
 
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
         adapter.AddFragment(new MovieFragment(), getString(R.string.tab1));

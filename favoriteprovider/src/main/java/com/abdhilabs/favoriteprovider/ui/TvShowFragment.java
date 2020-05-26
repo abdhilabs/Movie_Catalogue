@@ -4,25 +4,26 @@ package com.abdhilabs.favoriteprovider.ui;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.abdhilabs.favoriteprovider.R;
 import com.abdhilabs.favoriteprovider.adapter.MovieFavAdapter;
 
 public class TvShowFragment extends Fragment {
-    public static final String AUTHORITY = "com.abdhilabs.submission4.provider";
+    private static final String AUTHORITY = "com.abdhilabs.submission4.provider";
 
-    public static final Uri URI_TV_SHOW = Uri.parse(
+    private static final Uri URI_TV_SHOW = Uri.parse(
             "content://" + AUTHORITY + "/" + "tTvShow");
 
     private static final int LOADER_FAV = 2;
@@ -44,39 +45,33 @@ public class TvShowFragment extends Fragment {
         adapter = new MovieFavAdapter(getActivity());
         rvMovie.setAdapter(adapter);
 
-        getActivity().getSupportLoaderManager().initLoader(LOADER_FAV, null, mLoaderCallbacks);
+        requireActivity().getSupportLoaderManager().initLoader(LOADER_FAV, null, mLoaderCallbacks);
     }
 
-    LoaderManager.LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
+    private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
         @NonNull
         @Override
         public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle bundle) {
-            switch (id) {
-                case LOADER_FAV:
-                    return new CursorLoader(getContext(),
-                            URI_TV_SHOW,
-                            null,
-                            null, null, null);
-                default:
-                    throw new IllegalArgumentException();
+            if (id == LOADER_FAV) {
+                return new CursorLoader(requireContext(),
+                        URI_TV_SHOW,
+                        null,
+                        null, null, null);
             }
+            throw new IllegalArgumentException();
         }
 
         @Override
         public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
-            switch (loader.getId()) {
-                case LOADER_FAV:
-                    adapter.setMovie(cursor);
-                    break;
+            if (loader.getId() == LOADER_FAV) {
+                adapter.setMovie(cursor);
             }
         }
 
         @Override
         public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-            switch (loader.getId()) {
-                case LOADER_FAV:
-                    adapter.setMovie(null);
-                    break;
+            if (loader.getId() == LOADER_FAV) {
+                adapter.setMovie(null);
             }
         }
     };

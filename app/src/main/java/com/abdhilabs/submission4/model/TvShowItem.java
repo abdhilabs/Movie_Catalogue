@@ -1,9 +1,8 @@
 package com.abdhilabs.submission4.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -14,7 +13,6 @@ public class TvShowItem implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    @NonNull
     private int id;
 
     @ColumnInfo(name = "title")
@@ -37,7 +35,7 @@ public class TvShowItem implements Serializable {
     @SerializedName("overview")
     private String overview;
 
-    public TvShowItem(@NonNull int id, String title, String bannerPath, String posterPath, String releaseDate, String overview) {
+    public TvShowItem(int id, String title, String bannerPath, String posterPath, String releaseDate, String overview) {
         this.id = id;
         this.title = title;
         this.bannerPath = bannerPath;

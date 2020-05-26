@@ -13,8 +13,9 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.abdhilabs.submission4.MainActivity;
 import com.abdhilabs.submission4.R;
@@ -22,7 +23,6 @@ import com.abdhilabs.submission4.model.MovieItem;
 import com.abdhilabs.submission4.model.TvShowItem;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -189,42 +189,32 @@ public class ReminderReceiver extends BroadcastReceiver implements ReminderView.
 
     @Override
     public void setMovies(final Context context, final ArrayList<MovieItem> movies, final int notifId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int id = notifId;
-                for (MovieItem movie : movies) {
-                    try {
-                        URL url = new URL(BASE_POSTER + movie.getPosterPath());
-                        showReleaseMovieNotification(context, context.getString(R.string.todays_movie_release), movie, BitmapFactory.decodeStream(url.openConnection().getInputStream()), id);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    id++;
+        new Thread(() -> {
+            int id = notifId;
+            for (MovieItem movie : movies) {
+                try {
+                    URL url = new URL(BASE_POSTER + movie.getPosterPath());
+                    showReleaseMovieNotification(context, context.getString(R.string.todays_movie_release), movie, BitmapFactory.decodeStream(url.openConnection().getInputStream()), id);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                id++;
             }
         }).start();
     }
 
     @Override
     public void setTvShow(final Context context, final ArrayList<TvShowItem> tvShow, final int notifId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int id = notifId;
-                for (TvShowItem tvShow : tvShow) {
-                    try {
-                        URL url = new URL(BASE_POSTER + tvShow.getPosterPath());
-                        showReleaseTvShowNotification(context, context.getString(R.string.todays_tv_show_release), tvShow, BitmapFactory.decodeStream(url.openConnection().getInputStream()), id);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    id++;
+        new Thread(() -> {
+            int id = notifId;
+            for (TvShowItem tvShow1 : tvShow) {
+                try {
+                    URL url = new URL(BASE_POSTER + tvShow1.getPosterPath());
+                    showReleaseTvShowNotification(context, context.getString(R.string.todays_tv_show_release), tvShow1, BitmapFactory.decodeStream(url.openConnection().getInputStream()), id);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                id++;
             }
         }).start();
     }

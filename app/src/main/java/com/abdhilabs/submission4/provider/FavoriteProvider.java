@@ -6,8 +6,8 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.abdhilabs.submission4.db.AppDatabase;
 import com.abdhilabs.submission4.db.MovieFavDAO;
@@ -19,16 +19,8 @@ public class FavoriteProvider extends ContentProvider {
 
     public static final String AUTHORITY = "com.abdhilabs.submission4.provider";
 
-    public static final Uri URI_MOVIE = Uri.parse(
-            "content://" + AUTHORITY + "/" + "tMovie");
-
-    public static final Uri URI_TV_SHOW = Uri.parse(
-            "content://" + AUTHORITY + "/" + "tTvShow");
-
     private static final int CODE_MOVIE = 1;
     private static final int CODE_TV_SHOW = 2;
-
-    AppDatabase database;
 
     private static final UriMatcher MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
 
