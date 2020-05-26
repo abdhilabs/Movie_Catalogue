@@ -3,6 +3,7 @@ package com.abdhilabs.favoriteprovider;
 import android.os.Bundle;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.abdhilabs.favoriteprovider.adapter.ViewPageAdapter;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager viewPager = findViewById(R.id.viewPager);
 
-        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager());
+        ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         adapter.AddFragment(new MovieFragment(), getString(R.string.tab1));
         adapter.AddFragment(new TvShowFragment(), getString(R.string.tab2));
         viewPager.setAdapter(adapter);

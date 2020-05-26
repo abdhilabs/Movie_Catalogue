@@ -44,15 +44,15 @@ public class MovieFragment extends Fragment {
         adapter = new MovieFavAdapter(getActivity());
         rvMovie.setAdapter(adapter);
 
-        getActivity().getSupportLoaderManager().initLoader(LOADER_FAV, null, mLoaderCallbacks);
+        requireActivity().getSupportLoaderManager().initLoader(LOADER_FAV, null, mLoaderCallbacks);
     }
 
-    LoaderManager.LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
+    private LoaderManager.LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderManager.LoaderCallbacks<Cursor>() {
         @NonNull
         @Override
         public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle bundle) {
             if (id == LOADER_FAV) {
-                return new CursorLoader(getContext(),
+                return new CursorLoader(requireContext(),
                         URI_MOVIE,
                         null,
                         null, null, null);
